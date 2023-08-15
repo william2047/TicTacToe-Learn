@@ -81,16 +81,3 @@ class Game{
         }
     }
 }
-
-
-
-
-let test = new Game()
-
-test
-
-test.gameBoard = [['o','o','x'],['x','x','o'],['o','x','o']]
-
-test.logGameBoard()
-
-console.log(test.getState())
