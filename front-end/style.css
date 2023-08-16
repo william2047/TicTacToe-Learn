@@ -20,6 +20,40 @@ body{
 }
 
 h1{
-   font-size: 10rem; 
-   font-weight: 500;
+   font-size: 15rem; 
+   font-weight: 400;
+   margin-bottom: 4.5rem;
+}
+
+li{
+    width: fit-content;
+}
+
+.menuButtons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 4.5rem;
+}
+
+.menuButton{
+    border: none;
+    background: none;
+    font-size: 7rem;
+
+    transition: 0.15s;
+
+
+}
+
+.menuButton:hover{
+    cursor: pointer;
+
+    transform: scale(1.07);
+}
+
+.comingSoon:hover{
+    transform: scale(1);
+    opacity: 0.1;
 }
