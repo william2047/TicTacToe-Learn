@@ -1,31 +1,31 @@
-def min_max(board, current_player):
+# def min_max(board, current_player):
 
-    def get_zerosum_val(game_board, current_player, best_position):
-        new_best_position = best_position.copy()
+#     def get_zerosum_val(game_board, current_player, best_position):
+#         new_best_position = best_position.copy()
         
-        # Makes duplicate board for minmax algo
-        board = game_board.copy()
+#         # Makes duplicate board for minmax algo
+#         board = game_board.copy()
 
         
 
-        return new_best_position
+#         return new_best_position
 
 
 
 
-    # Makes duplicate board for minmax algo
-    game_board = board.copy()
+#     # Makes duplicate board for minmax algo
+#     game_board = board.copy()
     
-    # test value to throw error
-    empty_positions = get_empty_positions(game_board)
-    best_position=[0, empty_positions[0]]
+#     # test value to throw error
+#     empty_positions = get_empty_positions(game_board)
+#     best_position=[0, empty_positions[0]]
 
-    best_position = get_zerosum_val(game_board, current_player)
-
-
+#     best_position = get_zerosum_val(game_board, current_player)
 
 
-    board_write(board, current_player, best_position[1])
+
+
+#     board_write(board, current_player, best_position[1])
 
     
 
@@ -64,6 +64,9 @@ def get_empty_positions(game_board):
                 empty_positions.append((x, y))
     return empty_positions
 
+def board_write(board, player, position):
+    board[position[0]][position[1]] = player
+
 def print_board(board):
     print('*********************************')
     for i in range(3):
@@ -81,47 +84,3 @@ def print_board(board):
         
         if i != 2:
             print('---------')
-
-def board_write(board, player, position):
-    board[position[0]][position[1]] = player
-
-
-board = [[None, None, None], [None, None, None], [None, None, None]]
-
-print_board(board)
-
-board_write(board, 'o', get_empty_positions(board)[0])
-
-print_board(board)
-
-min_max(board, 'x')
-
-print_board(board)
-
-board_write(board, 'o', get_empty_positions(board)[0])
-
-print_board(board)
-
-min_max(board, 'x')
-
-print_board(board)
-
-board_write(board, 'o', get_empty_positions(board)[0])
-
-print_board(board)
-
-min_max(board, 'x')
-
-print_board(board)
-
-board_write(board, 'o', get_empty_positions(board)[0])
-
-print_board(board)
-
-min_max(board, 'x')
-
-print_board(board)
-
-board_write(board, 'o', get_empty_positions(board)[0])
-
-print_board(board)
