@@ -57,3 +57,47 @@ li{
     transform: scale(1);
     opacity: 0.1;
 }
+
+
+#gameBoard{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+
+    position: relative;
+
+    --dimension: 50rem;
+
+    height: var(--dimension);
+    width: var(--dimension);
+}
+
+.board-line{
+    position: absolute;
+
+    background-color: black;
+    --lineThickness: 0.8rem;
+}
+
+.board-line-row{
+    height: var(--lineThickness);
+    left: 0;
+    right: 0;
+}
+.board-line-column{
+    width: var(--lineThickness);
+    top: 0;
+    bottom: 0;
+}
+#board-line-row-1{
+    top: 33.33%;
+}
+#board-line-row-2{
+    top: 66.66%;
+}
+#board-line-column-1{
+    left: 33.33%;
+}
+#board-line-column-2{
+    left: 66.66%;
+}
