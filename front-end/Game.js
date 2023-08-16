@@ -1,10 +1,11 @@
 class Game{
     // Initiates empty board
+    // formatt [x][y]
     gameBoard = [[],[],[]]
 
     // Player 'o' always starts first, value will be toggled
     currentPlayer = 'o'
-
+    
     // Logs a formated board to console
     logGameBoard = () => {
         for(let y=0; y<=2; y++){
@@ -47,8 +48,21 @@ class Game{
         return diag
     }
 
-    // Returns the state of the board: 'x', if X player wins; 'o', if O player wins; null, if no one wins 
+    getEmptySlots = ()=>{
+        let emptySlots = []
+        for(let x=0; x<=2; x++){
+            for(let y=0; y<=2; y++){
+                if((y in this.gameBoard[x]) == false){
+                    emptySlots.push([x,y])
+                }
+            }
+        }
+        return emptySlots
+    }
+
+    // Returns the state of the board: 'x', if X player wins; 'o', if O player wins; null, if game is still ongoing; 'tie', if game ended with no winner
     getState = () => {
+
         for(let i=0; i<=2; i++){
             let col = this.getColumn(i)
             let row = this.getRow(i)
@@ -71,6 +85,10 @@ class Game{
             return diagDesc[0]
         }
 
+        if(this.getEmptySlots().length == 0){
+            return 'tie'
+        }
+
         return null
     }
 
@@ -81,3 +99,28 @@ class Game{
         }
     }
 }
+
+export function Round(player1PlayFunction, player2PlayFunction, isPlayer1First, gameBoardElement){
+    let isPlaying = true
+
+    game = new Game()
+
+    while(isPlaying){
+        // if it is player1's turn, make a move with player 1 function else, make a move with player 2 function
+        if(isPlayer1First){
+            game.positionWrite(player1PlayFunction(game.board))
+        }
+        else{
+            game.positionWrite(player1PlayFunction(game.board))
+        }
+
+        // cjec
+        if(game.getState() != null){
+            isPlaying =false
+        }
+    }
+}
+
+test = new Game()
+
+test.getEmptySlots()
