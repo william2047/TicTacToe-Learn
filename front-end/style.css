@@ -1,0 +1,25 @@
+body{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#mainContainer{    
+    width: fit-content;
+}
+
+*{
+    font-family: sans-serif;
+
+}
+
+h1{
+   font-size: 10rem; 
+   font-weight: 500;
+}
