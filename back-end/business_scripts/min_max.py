@@ -30,9 +30,7 @@
     
 
 
-
-
-
+# Gets the board status, returning either 'x', 'o', or None
 def get_board_status(game_board):
     # Check rows, columns, and diagonals
     for i in range(3):
@@ -56,6 +54,8 @@ def get_board_status(game_board):
     # If none of the above conditions are met, the game is still ongoing
     return None
 
+
+# Gets a list containing all of the empty positions on the board in the form of (x,y)
 def get_empty_positions(game_board):
     empty_positions = []
     for x in range(3):
@@ -64,9 +64,13 @@ def get_empty_positions(game_board):
                 empty_positions.append((x, y))
     return empty_positions
 
+
+# writes a board with the appropriate player ('x', or 'o') at the specified position in the form of (x,y)
 def board_write(board, player, position):
     board[position[0]][position[1]] = player
+    
 
+# Prints the board out in a formated style
 def print_board(board):
     print('*********************************')
     for i in range(3):
