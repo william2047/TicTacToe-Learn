@@ -1,3 +1,4 @@
+// Player function for local client
 async function SelectSlotPlay(gameBoard=null){
 
     function waitForButtonEvent(){
