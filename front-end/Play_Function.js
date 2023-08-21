@@ -1,5 +1,5 @@
 // Player function for local client
-async function SelectSlotPlay(gameBoard=null){
+async function selectSlotPlay(gameBoard=null){
 
     function waitForButtonEvent(){
         return new Promise((resolve)=>{
