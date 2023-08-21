@@ -1,24 +1,25 @@
-function SelectSlotPlay(gameBoard){
+async function SelectSlotPlay(gameBoard=null){
 
-    return new Promise((resolve, reject)=>{
-        console.log('awaiting play')
-
-        // callback function returns position of slot, and remove event listeners from elements
-        function eventLogic(event){
-            let slot = event.srcElement
-            console.log(slot.getAttribute('x'),slot.getAttribute('y'))
-            console.log(event)
+    function waitForButtonEvent(){
+        return new Promise((resolve)=>{
     
+            // callback function returns position of slot, and remove event listeners from elements
+            function eventLogic(event){
+                let slot = event.srcElement
+        
+                board.element.querySelectorAll('.board-slot').forEach((slot) =>{
+                    slot.removeEventListener('click', eventLogic)
+                })
+        
+                resolve([slot.getAttribute('x'),slot.getAttribute('y')])
+            }
+    
+            // adds call back function to event listener
             board.element.querySelectorAll('.board-slot').forEach((slot) =>{
-                slot.removeEventListener('click', eventLogic)
+                slot.addEventListener('click', eventLogic)
             })
-    
-            resolve([slot.getAttribute('x'),slot.getAttribute('y')])
-        }
-
-        // adds call back function to event listener
-        board.element.querySelectorAll('.board-slot').forEach((slot) =>{
-            slot.addEventListener('click', eventLogic)
         })
-    })
+    }   
+
+    return waitForButtonEvent()
 }

@@ -68,9 +68,14 @@ let board = new Page(
 
 // main.changeTo()
 
+// Main menu buttons to go to game mode
 main.singleplayerElement.addEventListener('click', ()=>{
     board.changeTo()
 })
 
 
+
 board.changeTo()
+
+
+let game = new Game(SelectSlotPlay, SelectSlotPlay, document.querySelector('#gameBoard'))
