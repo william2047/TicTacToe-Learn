@@ -78,4 +78,4 @@ main.singleplayerElement.addEventListener('click', ()=>{
 board.changeTo()
 
 
-let game = new Game(SelectSlotPlay, SelectSlotPlay, document.querySelector('#gameBoard'))
+let game = new Game(SelectSlotPlay, minMaxServerless, document.querySelector('#gameBoard'))
