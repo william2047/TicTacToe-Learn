@@ -101,3 +101,11 @@ li{
 #board-line-column-2{
     left: 66.66%;
 }
+
+.board-slot{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 10rem;
+}
