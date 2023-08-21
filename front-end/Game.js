@@ -1,7 +1,7 @@
 class Game{
     // Initiates empty board
     // formatt [x][y]
-    gameBoard = [[],[],[]]
+    gameBoard = [[undefined, undefined, undefined],[undefined, undefined, undefined],[undefined, undefined, undefined]]
 
     // Initiates player 'o' always starts first, value will be toggled and gamestate of null (meaning no game is currently playing)
     currentPlayer = 'o'
@@ -49,11 +49,12 @@ class Game{
         return diag
     }
 
+    // Gets an array of all the availible slots on the board
     getEmptySlots = ()=>{
         let emptySlots = []
         for(let x=0; x<=2; x++){
             for(let y=0; y<=2; y++){
-                if((y in this.gameBoard[x]) == false){
+                if(this.gameBoard[x][y] == undefined){
                     emptySlots.push([x,y])
                 }
             }
@@ -65,39 +66,33 @@ class Game{
     getState = () => {
 
         for(let i=0; i<=2; i++){
+
             let col = this.getColumn(i)
             let row = this.getRow(i)
             
-            if(col.every(val => (val === col[0]))){
-                if(col[0] != undefined){
-                    return col[0]
-                }
+            if(col.every(val => (val === col[0] && val != undefined))){
+                return col[0]
             }
-            if(row.every(val => val === row[0])){
-                if(row[0] != undefined){
-                    return row[0]
-                }
+            if(row.every(val => (val === row[0]) && (val != undefined))){
+                return row[0]
             }
         }
 
         let diagAsc = this.getDiagonal(true)
         let diagDesc = this.getDiagonal(false)
 
-        if(diagAsc.every(val => val === diagAsc[0])){
-            if(diagAsc[0] != undefined){
-                return diagAsc[0]
-            }
+        if(diagAsc.every(val => (val === diagAsc[0]) && (val != undefined))){
+            return diagAsc[0]
         }
-        if(diagDesc.every(val => val === diagDesc[0])){
-            if(diagDesc[0] != undefined){
-                return diagDesc[0]
-            }
+        if(diagDesc.every(val => (val === diagDesc[0]) && (val != undefined))){
+            return diagDesc[0]
         }
 
         if(this.getEmptySlots().length == 0){
             return 'tie'
         }
 
+        console.log("ONGOING Game")
         return null
     }
 
@@ -117,7 +112,7 @@ class Game{
         function playerPlay(self){
 
             if(self.gameState != null){
-                return self.gameState
+                console.log('the result is : ',self.gameState)
             }
 
             else{
@@ -130,8 +125,6 @@ class Game{
                         self.gameState = self.getState()
                         self.currentPlayer = 'x'
 
-                        self.logGameBoard()
-
                         return playerPlay(self)
                     }))
                 }
@@ -143,8 +136,6 @@ class Game{
                         // Updates Data
                         self.gameState = self.getState()
                         self.currentPlayer = 'o'
-                        
-                        self.logGameBoard()
 
                         return playerPlay(self)
                     }))
@@ -166,7 +157,7 @@ class Game{
         console.log(boardElement)
         let boardSlots = [[],[],[]]
         boardElement.querySelectorAll('.board-slot').forEach(boardSlot => {
-            boardSlots[boardSlot.getAttribute('y')][boardSlot.getAttribute('x')] = boardSlot
+            boardSlots[boardSlot.getAttribute('x')][boardSlot.getAttribute('y')] = boardSlot
         })
         this.boardSlots = boardSlots
 
