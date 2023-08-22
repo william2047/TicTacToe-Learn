@@ -12,40 +12,60 @@ for example
 board = [[None, None, None], [None, None, None], [None, None, None]]
 """
 def get_optimal_position(board):
-    def min_max(board, is_maximizing, depth):
-        # Base cases
-        status = get_board_status(board)
-        if status == 'x':
-            return 10 - depth, None
-        elif status == 'o':
-            return -10 + depth, None
-        elif status == 'tie':
-            return 0, None
+    def is_winner(board, player):
+        for i in range(3):
+            if all([cell == player for cell in board[i]]):  # Check rows
+                return True
+            if all([board[j][i] == player for j in range(3)]):  # Check columns
+                return True
+        if board[0][0] == board[1][1] == board[2][2] == player:  # Check main diagonal
+            return True
+        if board[0][2] == board[1][1] == board[2][0] == player:  # Check other diagonal
+            return True
+        return False
 
-        # If this is the maximizing player's move (player 'x')
+    def minimax(board, depth, is_maximizing):
+        if is_winner(board, 'x'):
+            return -10 + depth
+        if is_winner(board, 'o'):
+            return 10 - depth
+        if all(cell in ['x', 'o'] for row in board for cell in row):
+            return 0
+
         if is_maximizing:
-            max_eval = -float('inf')
-            best_move = None
-            for position in get_empty_positions(board):
-                board_write(board, 'x', position)
-                eval, _ = min_max(board, False, depth + 1)
-                board_write(board, None, position)  # Undo the move
-                if eval > max_eval:
-                    max_eval = eval
-                    best_move = position
-            return max_eval, best_move
-
-        # If this is the minimizing player's move (player 'o')
+            max_eval = float('-inf')
+            for i in range(3):
+                for j in range(3):
+                    if board[i][j] is None:
+                        board[i][j] = 'o'
+                        eval = minimax(board, depth + 1, False)
+                        board[i][j] = None
+                        max_eval = max(max_eval, eval)
+            return max_eval
         else:
             min_eval = float('inf')
-            best_move = None
-            for position in get_empty_positions(board):
-                board_write(board, 'o', position)
-                eval, _ = min_max(board, True, depth + 1)
-                board_write(board, None, position)  # Undo the move
-                if eval < min_eval:
-                    min_eval = eval
-                    best_move = position
-            return min_eval, best_move
+            for i in range(3):
+                for j in range(3):
+                    if board[i][j] is None:
+                        board[i][j] = 'x'
+                        eval = minimax(board, depth + 1, True)
+                        board[i][j] = None
+                        min_eval = min(min_eval, eval)
+            return min_eval
 
-    return min_max(board, True, 0)[1]
+    best_score = float('-inf')
+    best_move = None
+
+    for i in range(3):
+        for j in range(3):
+            if board[i][j] is None:
+                board[i][j] = 'o'
+                score = minimax(board, 0, False)
+                board[i][j] = None
+                if score > best_score:
+                    best_score = score
+                    best_move = [i, j]
+
+    return best_move
+
+print(get_optimal_position())
