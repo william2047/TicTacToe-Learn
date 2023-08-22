@@ -24,3 +24,21 @@ async function selectSlotPlay(gameBoard=null){
 
     return waitForButtonEvent()
 }
+
+
+async function minMaxServerless(gameBoard){
+
+    let gameBoardFormatted = JSON.stringify([['o', null, null],[null, null, null],[null, null, null]])
+
+
+    console.log(gameBoardFormatted)
+
+    fetch('https://xblb81ggs6.execute-api.ca-central-1.amazonaws.com/default/TicTacToe_MinMax',{
+        method: 'POST',
+        body: gameBoardFormatted
+    })
+    .then(response=> response.json())
+    .then((response=>{
+        return response
+    }))
+}
